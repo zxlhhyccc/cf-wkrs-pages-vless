@@ -746,8 +746,8 @@ async function handleUDPOutBound(webSocket, vlessResponseHeader, log) {
  * @returns {string}
  */
 function getVLESSConfig(userID, hostName) {
-    const vlessLink = `vless://${userID}@www.gov.se:80?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2048#Misaka-workers`
-    const vlessTlsLink = `vless://${userID}@www.gov.se:443?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2048#Misaka-workers-TLS`
+    const vlessLink = `vless://${userID}\u0040www.gov.se:80?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2048#Misaka-workers`
+    const vlessTlsLink = `vless://${userID}\u0040www.gov.se:443?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2048#Misaka-workers-TLS`
     return `
 下面是非 TLS 端口的节点信息及分享链接，可使用 CF 支持的非 TLS 端口：
 
