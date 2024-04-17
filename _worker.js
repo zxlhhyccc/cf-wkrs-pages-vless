@@ -31,7 +31,7 @@ export default {
      */
     async fetch(request, env, ctx) {
         try {
-            userID = env.UUID || userID;
+            userID = userID || env.UUID;
             proxyIP = env.PROXYIP || proxyIP;
             dohURL = env.DNS_RESOLVER_URL || dohURL;
             nodeId = env.NODE_ID || nodeId;
