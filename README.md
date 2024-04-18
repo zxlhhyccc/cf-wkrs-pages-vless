@@ -4,8 +4,8 @@
 
 ## 部署教程
 
-- Workers 教程地址：https://blog.misaka.rest/2023/07/29/cf-wkrs-vless/
-- Pages 教程地址：https://blog.misaka.rest/2023/07/29/cf-pages-vless/
+- Workers 教程地址：https://blog.misaka.cyou/2023/07/29/cf-wkrs-vless/
+- Pages 教程地址：https://blog.misaka.cyou/2023/07/29/cf-pages-vless/
 
 ## 鸣谢项目
 
