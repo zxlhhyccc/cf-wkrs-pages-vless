@@ -34,7 +34,7 @@ export default {
      */
     async fetch(request, env, ctx) {
         try {
-            userID = userID || env.UUID;
+            userID = userID;
             proxyIP = env.PROXYIP || proxyIP;
             dohURL = env.DNS_RESOLVER_URL || dohURL;
             nodeId = env.NODE_ID || nodeId;
@@ -879,10 +879,9 @@ proxies:
   server: ${bestCFIP}
   port: 80
   uuid: ${userID}
-  udp: true
+  udp: false
   tls: false
   network: ws
-  servername: ${hostName}
   ws-opts:
     path: "/?ed=2048"
     headers:
@@ -893,10 +892,9 @@ proxies:
   server: ${bestCFIP}
   port: 8080
   uuid: ${userID}
-  udp: true
+  udp: false
   tls: false
   network: ws
-  servername: ${hostName}
   ws-opts:
     path: "/?ed=2048"
     headers:
@@ -907,10 +905,9 @@ proxies:
   server: ${bestCFIP}
   port: 8880
   uuid: ${userID}
-  udp: true
+  udp: false
   tls: false
   network: ws
-  servername: ${hostName}
   ws-opts:
     path: "/?ed=2048"
     headers:
@@ -921,10 +918,9 @@ proxies:
   server: ${bestCFIP}
   port: 2052
   uuid: ${userID}
-  udp: true
+  udp: false
   tls: false
   network: ws
-  servername: ${hostName}
   ws-opts:
     path: "/?ed=2048"
     headers:
@@ -935,10 +931,9 @@ proxies:
   server: ${bestCFIP}
   port: 2082
   uuid: ${userID}
-  udp: true
+  udp: false
   tls: false
   network: ws
-  servername: ${hostName}
   ws-opts:
     path: "/?ed=2048"
     headers:
@@ -949,10 +944,9 @@ proxies:
   server: ${bestCFIP}
   port: 2086
   uuid: ${userID}
-  udp: true
+  udp: false
   tls: false
   network: ws
-  servername: ${hostName}
   ws-opts:
     path: "/?ed=2048"
     headers:
@@ -963,7 +957,7 @@ proxies:
   server: ${bestCFIP}
   port: 2095
   uuid: ${userID}
-  udp: true
+  udp: false
   tls: false
   network: ws
   servername: ${hostName}
@@ -977,7 +971,7 @@ proxies:
   server: ${bestCFIP}
   port: 443
   uuid: ${userID}
-  udp: true
+  udp: false
   tls: true
   network: ws
   servername: ${hostName}
@@ -991,7 +985,7 @@ proxies:
   server: ${bestCFIP}
   port: 2053
   uuid: ${userID}
-  udp: true
+  udp: false
   tls: true
   network: ws
   servername: ${hostName}
@@ -1005,7 +999,7 @@ proxies:
   server: ${bestCFIP}
   port: 2083
   uuid: ${userID}
-  udp: true
+  udp: false
   tls: true
   network: ws
   servername: ${hostName}
@@ -1019,7 +1013,7 @@ proxies:
   server: ${bestCFIP}
   port: 2087
   uuid: ${userID}
-  udp: true
+  udp: false
   tls: true
   network: ws
   servername: ${hostName}
@@ -1033,7 +1027,7 @@ proxies:
   server: ${bestCFIP}
   port: 2096
   uuid: ${userID}
-  udp: true
+  udp: false
   tls: true
   network: ws
   servername: ${hostName}
@@ -1047,7 +1041,7 @@ proxies:
   server: ${bestCFIP}
   port: 8443
   uuid: ${userID}
-  udp: true
+  udp: false
   tls: true
   network: ws
   servername: ${hostName}
