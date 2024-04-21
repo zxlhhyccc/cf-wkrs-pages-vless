@@ -106,7 +106,7 @@ export default {
                         return new Response(`${singConfig}`, {
                             status: 200,
                             headers: {
-                                "Content-Type": "text/plain;charset=utf-8",
+                                "Content-Type": "application/json;charset=utf-8",
                             }
                         });
                     }
@@ -761,7 +761,7 @@ function getVLESSConfig(userID, hostName) {
     const vlessLink = `vless://${userID}\u0040${bestCFIP}:80?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#Misaka-workers`
     const vlessTlsLink = `vless://${userID}\u0040${bestCFIP}:443?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#Misaka-workers-TLS`
     return `
-下面是非 TLS 端口的节点信息及分享链接，可使用 CF 支持的非 TLS 端口：
+下面是非 TLS 端口的节点信息及节点分享链接，可使用 CF 支持的非 TLS 端口：
 
 地址：${hostName} 或 CF 优选 IP
 端口：80 或 CF 支持的非 TLS 端口
@@ -772,7 +772,7 @@ UUID：${userID}
 
 ${vlessLink}
 
-下面是 TLS 端口的节点信息及分享链接，可使用 CF 支持的 TLS 端口：
+下面是 TLS 端口的节点信息及节点分享链接，可使用 CF 支持的 TLS 端口：
 
 地址：${hostName} 或 CF 优选 IP
 端口：443 或 CF 支持的 TLS 端口
@@ -784,6 +784,8 @@ UUID：${userID}
 SNI 域名：${hostName}
 
 ${vlessTlsLink}
+
+Sing-box 配置文件订阅链接：https://${hostName}/${userID}/sb
 
 提示：部分地区有 CF 默认域名被污染的情况，除非打开客户端的 TLS 分片功能，否则无法使用 TLS 端口的节点
 如为 Pages 部署的节点则只能使用 TLS 端口的节点
@@ -893,25 +895,25 @@ function getSingConfig(userID, hostName) {
       "default": "auto",
       "outbounds": [
         "auto",
-        "workers-ws-80",
-        "workers-ws-8080",
-        "workers-ws-8880",
-        "workers-ws-2052",
-        "workers-ws-2082",
-        "workers-ws-2086",
-        "workers-ws-2095",
-        "workers-ws-tls-443",
-        "workers-ws-tls-2053",
-        "workers-ws-tls-2083",
-        "workers-ws-tls-2087",
-        "workers-ws-tls-2096",
-        "workers-ws-tls-8443"
+        "cf-vless-80",
+        "cf-vless-8080",
+        "cf-vless-8880",
+        "cf-vless-2052",
+        "cf-vless-2082",
+        "cf-vless-2086",
+        "cf-vless-2095",
+        "cf-vless-tls-443",
+        "cf-vless-tls-2053",
+        "cf-vless-tls-2083",
+        "cf-vless-tls-2087",
+        "cf-vless-tls-2096",
+        "cf-vless-tls-8443"
       ]
     },
     {
       "server": "${bestCFIP}",
       "server_port": 80,
-      "tag": "workers-ws-80",
+      "tag": "cf-vless-80",
       "packet_encoding": "packetaddr",
       "transport": {
         "headers": {
@@ -928,7 +930,7 @@ function getSingConfig(userID, hostName) {
     {
       "server": "${bestCFIP}",
       "server_port": 8080,
-      "tag": "workers-ws-8080",
+      "tag": "cf-vless-8080",
       "packet_encoding": "packetaddr",
       "transport": {
         "headers": {
@@ -945,7 +947,7 @@ function getSingConfig(userID, hostName) {
     {
       "server": "${bestCFIP}",
       "server_port": 8880,
-      "tag": "workers-ws-8880",
+      "tag": "cf-vless-8880",
       "packet_encoding": "packetaddr",
       "transport": {
         "headers": {
@@ -962,7 +964,7 @@ function getSingConfig(userID, hostName) {
     {
       "server": "${bestCFIP}",
       "server_port": 2052,
-      "tag": "workers-ws-2052",
+      "tag": "cf-vless-2052",
       "packet_encoding": "packetaddr",
       "transport": {
         "headers": {
@@ -979,7 +981,7 @@ function getSingConfig(userID, hostName) {
     {
       "server": "${bestCFIP}",
       "server_port": 2082,
-      "tag": "workers-ws-2082",
+      "tag": "cf-vless-2082",
       "packet_encoding": "packetaddr",
       "transport": {
         "headers": {
@@ -996,7 +998,7 @@ function getSingConfig(userID, hostName) {
     {
       "server": "${bestCFIP}",
       "server_port": 2086,
-      "tag": "workers-ws-2086",
+      "tag": "cf-vless-2086",
       "packet_encoding": "packetaddr",
       "transport": {
         "headers": {
@@ -1013,7 +1015,7 @@ function getSingConfig(userID, hostName) {
     {
       "server": "${bestCFIP}",
       "server_port": 2095,
-      "tag": "workers-ws-2095",
+      "tag": "cf-vless-2095",
       "packet_encoding": "packetaddr",
       "transport": {
         "headers": {
@@ -1030,7 +1032,7 @@ function getSingConfig(userID, hostName) {
     {
       "server": "${bestCFIP}",
       "server_port": 443,
-      "tag": "workers-ws-tls-443",
+      "tag": "cf-vless-tls-443",
       "tls": {
         "enabled": true,
         "server_name": "${hostName}",
@@ -1056,7 +1058,7 @@ function getSingConfig(userID, hostName) {
     {
       "server": "${bestCFIP}",
       "server_port": 2053,
-      "tag": "workers-ws-tls-2053",
+      "tag": "cf-vless-tls-2053",
       "tls": {
         "enabled": true,
         "server_name": "${hostName}",
@@ -1082,7 +1084,7 @@ function getSingConfig(userID, hostName) {
     {
       "server": "${bestCFIP}",
       "server_port": 2083,
-      "tag": "workers-ws-tls-2083",
+      "tag": "cf-vless-tls-2083",
       "tls": {
         "enabled": true,
         "server_name": "${hostName}",
@@ -1108,7 +1110,7 @@ function getSingConfig(userID, hostName) {
     {
       "server": "${bestCFIP}",
       "server_port": 2087,
-      "tag": "workers-ws-tls-2087",
+      "tag": "cf-vless-tls-2087",
       "tls": {
         "enabled": true,
         "server_name": "${hostName}",
@@ -1134,7 +1136,7 @@ function getSingConfig(userID, hostName) {
     {
       "server": "${bestCFIP}",
       "server_port": 2096,
-      "tag": "workers-ws-tls-2096",
+      "tag": "cf-vless-tls-2096",
       "tls": {
         "enabled": true,
         "server_name": "${hostName}",
@@ -1160,7 +1162,7 @@ function getSingConfig(userID, hostName) {
     {
       "server": "${bestCFIP}",
       "server_port": 8443,
-      "tag": "workers-ws-tls-8443",
+      "tag": "cf-vless-tls-8443",
       "tls": {
         "enabled": true,
         "server_name": "${hostName}",
@@ -1199,19 +1201,19 @@ function getSingConfig(userID, hostName) {
       "tag": "auto",
       "type": "urltest",
       "outbounds": [
-        "workers-ws-80",
-        "workers-ws-8080",
-        "workers-ws-8880",
-        "workers-ws-2052",
-        "workers-ws-2082",
-        "workers-ws-2086",
-        "workers-ws-2095",
-        "workers-ws-tls-443",
-        "workers-ws-tls-2053",
-        "workers-ws-tls-2083",
-        "workers-ws-tls-2087",
-        "workers-ws-tls-2096",
-        "workers-ws-tls-8443"
+        "cf-vless-80",
+        "cf-vless-8080",
+        "cf-vless-8880",
+        "cf-vless-2052",
+        "cf-vless-2082",
+        "cf-vless-2086",
+        "cf-vless-2095",
+        "cf-vless-tls-443",
+        "cf-vless-tls-2053",
+        "cf-vless-tls-2083",
+        "cf-vless-tls-2087",
+        "cf-vless-tls-2096",
+        "cf-vless-tls-8443"
       ],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
