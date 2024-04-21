@@ -101,6 +101,15 @@ export default {
                             }
                         });
                     }
+                    case `/${userID}/clash`: {
+                        const clashConfig = getClashConfig(userID, request.headers.get('Host'));
+                        return new Response(`${clashConfig}`, {
+                            status: 200,
+                            headers: {
+                                "Content-Type": "text/plain;charset=utf-8",
+                            }
+                        });
+                    }
                     case `/${userID}/sb`: {
                         const singConfig = getSingConfig(userID, request.headers.get('Host'));
                         return new Response(`${singConfig}`, {
@@ -768,7 +777,7 @@ function getVLESSConfig(userID, hostName) {
 UUID：${userID}
 传输：ws
 伪装域名：${hostName}
-路径：/?ed=2560
+路径：/?ed=2048
 
 ${vlessLink}
 
@@ -780,11 +789,12 @@ UUID：${userID}
 传输：ws
 传输层安全：TLS
 伪装域名：${hostName}
-路径：/?ed=2560
+路径：/?ed=2048
 SNI 域名：${hostName}
 
 ${vlessTlsLink}
 
+Clash 配置文件订阅链接：https://${hostName}/${userID}/clash
 Sing-box 配置文件订阅链接：https://${hostName}/${userID}/sb
 
 提示：部分地区有 CF 默认域名被污染的情况，除非打开客户端的 TLS 分片功能，否则无法使用 TLS 端口的节点
@@ -792,6 +802,284 @@ Sing-box 配置文件订阅链接：https://${hostName}/${userID}/sb
 ---------------------------------------------------------------
 更多教程，请关注：小御坂的破站
 `;
+}
+
+function getClashConfig(userID, hostName) {
+    return `port: 7890
+allow-lan: true
+mode: rule
+log-level: info
+unified-delay: true
+global-client-fingerprint: chrome
+dns:
+  enable: true
+  listen: :53
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  default-nameserver: 
+    - 223.5.5.5
+    - 114.114.114.114
+    - 8.8.8.8
+  nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  fallback:
+    - https://1.0.0.1/dns-query
+    - tls://dns.google
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+
+proxies:
+- name: cf-vless-80
+  type: vless
+  server: ${bestCFIP}
+  port: 80
+  uuid: ${userID}
+  udp: true
+  tls: false
+  network: ws
+  servername: ${hostName}
+  ws-opts:
+    path: "/?ed=2048"
+    headers:
+      Host: ${hostName}
+
+- name: cf-vless-8080
+  type: vless
+  server: ${bestCFIP}
+  port: 8080
+  uuid: ${userID}
+  udp: true
+  tls: false
+  network: ws
+  servername: ${hostName}
+  ws-opts:
+    path: "/?ed=2048"
+    headers:
+      Host: ${hostName}
+
+- name: cf-vless-8880
+  type: vless
+  server: ${bestCFIP}
+  port: 8880
+  uuid: ${userID}
+  udp: true
+  tls: false
+  network: ws
+  servername: ${hostName}
+  ws-opts:
+    path: "/?ed=2048"
+    headers:
+      Host: ${hostName}
+
+- name: cf-vless-2052
+  type: vless
+  server: ${bestCFIP}
+  port: 2052
+  uuid: ${userID}
+  udp: true
+  tls: false
+  network: ws
+  servername: ${hostName}
+  ws-opts:
+    path: "/?ed=2048"
+    headers:
+      Host: ${hostName}
+
+- name: cf-vless-2082
+  type: vless
+  server: ${bestCFIP}
+  port: 2082
+  uuid: ${userID}
+  udp: true
+  tls: false
+  network: ws
+  servername: ${hostName}
+  ws-opts:
+    path: "/?ed=2048"
+    headers:
+      Host: ${hostName}
+
+- name: cf-vless-2086
+  type: vless
+  server: ${bestCFIP}
+  port: 2086
+  uuid: ${userID}
+  udp: true
+  tls: false
+  network: ws
+  servername: ${hostName}
+  ws-opts:
+    path: "/?ed=2048"
+    headers:
+      Host: ${hostName}
+
+- name: cf-vless-2095
+  type: vless
+  server: ${bestCFIP}
+  port: 2095
+  uuid: ${userID}
+  udp: true
+  tls: false
+  network: ws
+  servername: ${hostName}
+  ws-opts:
+    path: "/?ed=2048"
+    headers:
+      Host: ${hostName}
+
+- name: cf-vless-tls-443
+  type: vless
+  server: ${bestCFIP}
+  port: 443
+  uuid: ${userID}
+  udp: true
+  tls: true
+  network: ws
+  servername: ${hostName}
+  ws-opts:
+    path: "/?ed=2048"
+    headers:
+      Host: ${hostName}
+
+- name: cf-vless-tls-2053
+  type: vless
+  server: ${bestCFIP}
+  port: 2053
+  uuid: ${userID}
+  udp: true
+  tls: true
+  network: ws
+  servername: ${hostName}
+  ws-opts:
+    path: "/?ed=2048"
+    headers:
+      Host: ${hostName}
+
+- name: cf-vless-tls-2083
+  type: vless
+  server: ${bestCFIP}
+  port: 2083
+  uuid: ${userID}
+  udp: true
+  tls: true
+  network: ws
+  servername: ${hostName}
+  ws-opts:
+    path: "/?ed=2048"
+    headers:
+      Host: ${hostName}
+
+- name: cf-vless-tls-2087
+  type: vless
+  server: ${bestCFIP}
+  port: 2087
+  uuid: ${userID}
+  udp: true
+  tls: true
+  network: ws
+  servername: ${hostName}
+  ws-opts:
+    path: "/?ed=2048"
+    headers:
+      Host: ${hostName}
+
+- name: cf-vless-tls-2096
+  type: vless
+  server: ${bestCFIP}
+  port: 2096
+  uuid: ${userID}
+  udp: true
+  tls: true
+  network: ws
+  servername: ${hostName}
+  ws-opts:
+    path: "/?ed=2048"
+    headers:
+      Host: ${hostName}
+
+- name: cf-vless-tls-8443
+  type: vless
+  server: ${bestCFIP}
+  port: 8443
+  uuid: ${userID}
+  udp: true
+  tls: true
+  network: ws
+  servername: ${hostName}
+  ws-opts:
+    path: "/?ed=2048"
+    headers:
+      Host: ${hostName}
+
+proxy-groups:
+- name: 负载均衡
+  type: load-balance
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+  proxies:
+    - cf-vless-80
+    - cf-vless-8080
+    - cf-vless-8880
+    - cf-vless-2052
+    - cf-vless-2082
+    - cf-vless-2086
+    - cf-vless-2095
+    - cf-vless-tls-443
+    - cf-vless-tls-2053
+    - cf-vless-tls-2083
+    - cf-vless-tls-2087
+    - cf-vless-tls-2096
+    - cf-vless-tls-8443
+
+- name: 自动选择
+  type: url-test
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  proxies:
+    - cf-vless-80
+    - cf-vless-8080
+    - cf-vless-8880
+    - cf-vless-2052
+    - cf-vless-2082
+    - cf-vless-2086
+    - cf-vless-2095
+    - cf-vless-tls-443
+    - cf-vless-tls-2053
+    - cf-vless-tls-2083
+    - cf-vless-tls-2087
+    - cf-vless-tls-2096
+    - cf-vless-tls-8443
+    
+- name: 🌍选择代理
+  type: select
+  proxies:
+    - 负载均衡
+    - 自动选择
+    - DIRECT
+    - cf-vless-80
+    - cf-vless-8080
+    - cf-vless-8880
+    - cf-vless-2052
+    - cf-vless-2082
+    - cf-vless-2086
+    - cf-vless-2095
+    - cf-vless-tls-443
+    - cf-vless-tls-2053
+    - cf-vless-tls-2083
+    - cf-vless-tls-2087
+    - cf-vless-tls-2096
+    - cf-vless-tls-8443
+
+rules:
+  - GEOIP,LAN,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,🌍选择代理`
 }
 
 function getSingConfig(userID, hostName) {
