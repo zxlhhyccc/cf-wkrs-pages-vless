@@ -1,6 +1,15 @@
 # cf-wkrs-pages-vless
 
-在 CloudFlare Workers 或 Pages 部署 vless 节点
+在 CloudFlare Workers 或 Pages 部署 vless 节点，支持 Base64、Clash 及 Sing-box 配置文件订阅文件生成
+
+## 使用方法
+
+- 访问 https://a.sub.workers.dev/d342d11e-d424-4583-b36e-524ab1f0afa4 ，即可查看节点明文配置信息
+- 访问 https://a.sub.workers.dev/d342d11e-d424-4583-b36e-524ab1f0afa4 ，即可查看节点明文配置信息
+- 访问 https://a.sub.workers.dev/d342d11e-d424-4583-b36e-524ab1f0afa4 ，即可查看节点明文配置信息
+- 访问 https://a.sub.workers.dev/d342d11e-d424-4583-b36e-524ab1f0afa4 ，即可查看节点明文配置信息
+
+> 提示：`https://a.sub.workers.dev/` 为瞎编的 Workers 或 Pages 部署地址，请修改为自己实际部署的地址；`d342d11e-d424-4583-b36e-524ab1f0afa4` 为项目默认的 UUID，请在实际部署的时候在代码文件的第 6 行处，修改为自己生成的 UUID
 
 ## 部署教程
 
