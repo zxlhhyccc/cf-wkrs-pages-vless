@@ -15,3 +15,6 @@ proxyip.oracle.fxxk.dedyn.io
 IP落地区域: 甲骨文 维护频率: 4小时/次
 proxyip.digitalocean.fxxk.dedyn.io 
 IP落地区域: 数码海 维护频率: 4小时/次
+
+bestproxy.onecf.eu.org
+ipdb.rr.nu
